@@ -116,14 +116,14 @@ def store_attempt(task_id):
     return ""
 
 @app.route('/oauth/authenticate')
-"""Initiates OAuth authentication agains the OSM server"""
 def oauth_authenticate():
+    """Initiates OAuth authentication agains the OSM server"""
     return osm.authorize(callback=url_for('oauth_authorized',
       next=request.args.get('next') or request.referrer or None))
 
 @app.route('/oauth/callback')
-"""Receives the OAuth callback from OSM"""
 def oauth_authorized(resp):
+    """Receives the OAuth callback from OSM"""
     next_url = request.args.get('next') or url_for('index')
     if resp is None:
       flash(u'You denied the request to sign in.')
